@@ -1,0 +1,33 @@
+{
+  "clientes": [
+    {
+      "id": 2,
+      "nombre": "Karen",
+      "telefono": 138198313,
+      "email": "karen@juan.com",
+      "empresa": "Codigo Con Juan"
+    },
+    {
+      "id": 4,
+      "nombre": "Miguel",
+      "telefono": 319381983,
+      "email": "miguel@juan.com",
+      "empresa": "Codigo Con Juan"
+    },
+    {
+      "id": 5,
+      "nombre": "Pedro",
+      "telefono": 1398198938,
+      "email": "pedro@juan.com",
+      "empresa": "Codigo Con Juan"
+    },
+    {
+      "nombre": "Juan Carlos",
+      "empresa": "gera",
+      "email": "gerardo.delossantos19@sistemas.tecsanpedro.edu.mx",
+      "telefono": "111111",
+      "notas": "El cliente quiere un ecommerce\n",
+      "id": 6
+    }
+  ]
+}
