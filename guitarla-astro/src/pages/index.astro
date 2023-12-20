@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Guitarra from '../components/guitarra.astro';
+import Posts from '../components/posts.astro';
+import Curso from '../components/curso.astro';
+const urlGuitarras = `${import.meta.env.PUBLIC_API_URL}/guitarras?populate=imagen`
+const urlBlog = `${import.meta.env.PUBLIC_API_URL}/posts?populate=imagen`;
+const urlCurso = `${import.meta.env.PUBLIC_API_URL}/curso?populate=imagen`;
+
+const [resGuitarras, resBlog, resCurso] = await Promise.all([
+	fetch(urlGuitarras),
+	fetch(urlBlog),
+	fetch(urlCurso),
+]);
+
+const [{data: guitarras}, {data: posts}
+, {data: curso}] = await Promise.all([
+	resGuitarras.json(),
+	resBlog.json(),
+	resCurso.json(),
+])
+
+console.log(curso)
+---
+
+<Layout title="Inicio" description="Venta de guitarras, cursos y más...">
+	<main class="contenedor">
+		<h1 class="heading">Nuestra coleccción</h1>
+		<div class="grid">
+			{
+				guitarras?.map(guitarra => (
+					<Guitarra 
+						nombre={guitarra.attributes.nombre}
+						descripcion={guitarra.attributes.descripcion}
+						url={guitarra.attributes.url}
+						imagen={guitarra.attributes.imagen.data.attributes.formats.medium.url}
+						precio={guitarra.attributes.precio}	
+				
+					/>
+				))
+			}
+		</div>
+	</main>
+
+	<Curso
+	titulo={curso.attributes.titulo}
+	contenido={curso.attributes.contenido}
+	imagen={curso.attributes.imagen.data.attributes.url}
+/>
+
+<section class="contenedor">
+	<h2 class="heading">Blog</h2>
+	<div class="grid">
+		{posts?.map(posts => (
+			<Posts titulo={posts.attributes.titulo}
+				publishedAt={posts.attributes.publishedAt}
+				contenido={posts.attributes.contenido}
+				imagen={posts.attributes.imagen.data.attributes.formats.medium.url}
+				url={posts.attributes.url}
+			/>
+		))}
+	</div>
+</section> 
+</Layout>
+
+<style>
+
+</style>
